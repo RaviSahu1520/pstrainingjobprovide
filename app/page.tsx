@@ -1,10 +1,16 @@
+'use client';
+
+import { useState } from 'react';
 import { ArrowRight, Mail, Phone, MapPin, Youtube, Instagram, Facebook, Send, Menu, X, CheckCircle2, Star } from 'lucide-react';
 import { siteConfig, placements, trainingPrograms, navLinks, stats, testimonials } from './data';
 
 // ============================================
 // NAVBAR COMPONENT
 // ============================================
+
 function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,10 +42,42 @@ function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2 rounded-lg hover:bg-gray-100">
-            <Menu className="w-6 h-6 text-[#002147]" />
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-[#002147]" />
+            ) : (
+              <Menu className="w-6 h-6 text-[#002147]" />
+            )}
           </button>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-100 bg-white">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-[#002147] hover:text-[#D4AF37] hover:bg-gray-50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="block px-3 py-2 rounded-md text-base font-medium bg-[#D4AF37] text-white hover:bg-[#B8941F] transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Enroll Now
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
@@ -197,15 +235,6 @@ function PlacementsSection() {
           ))}
         </div>
 
-        {/* Load More CTA */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 mb-4">
-            Showing <span className="font-semibold text-[#002147]">{placements.length}</span> of 2000+ placements
-          </p>
-          <button className="border-2 border-[#002147] hover:bg-[#002147] hover:text-white text-[#002147] px-8 py-3 rounded-xl font-semibold transition-all duration-300">
-            View All Placements
-          </button>
-        </div>
       </div>
     </section>
   );
