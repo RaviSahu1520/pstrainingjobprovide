@@ -56,13 +56,13 @@ function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-100 bg-white">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden border-t border-gray-200 bg-white absolute top-16 md:top-20 left-0 right-0 shadow-lg">
+            <div className="px-4 pt-4 pb-6 space-y-2 max-w-7xl mx-auto">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-[#002147] hover:text-[#D4AF37] hover:bg-gray-50 transition-colors"
+                  className="block px-4 py-3 rounded-lg text-base font-medium text-[#002147] hover:text-[#D4AF37] hover:bg-gray-50 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -70,7 +70,7 @@ function Navbar() {
               ))}
               <a
                 href="#contact"
-                className="block px-3 py-2 rounded-md text-base font-medium bg-[#D4AF37] text-white hover:bg-[#B8941F] transition-colors"
+                className="block px-4 py-3 rounded-lg text-base font-medium bg-[#D4AF37] text-white hover:bg-[#B8941F] transition-colors text-center mt-4"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Enroll Now
